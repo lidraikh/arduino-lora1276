@@ -1,5 +1,5 @@
 #include "mgos.h"
 
-bool mgos_empty_init(void) {
+bool mgos_arduino_lora1276(void) {
   return true;
 }
