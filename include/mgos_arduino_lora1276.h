@@ -15,7 +15,7 @@ extern "C"
     // Code goes here
     LORA *mgos_LORA_create(int NSSPin, int NRESETPin, int txEnPin, int rxEnPin);
 
-    bool mgos_LORA_close(LORA *lora);
+    void mgos_LORA_close(LORA *lora);
 
     ///  @return  1 if ok, 0 otherwise
     bool mgos_LORA_init(LORA *lora);
@@ -30,7 +30,7 @@ extern "C"
     ///  Receive packet from RF
     ///  @param recvbuf		buf to save the rx data
     ///	 @return length of rx data
-    uint8_t rxPacket(LORA *lora, int *recvbuf);
+    int mgos_LORA_rxPacket(LORA *lora, int *recvbuf);
     ///  Inquire interrupt.
     ///  @param irqMask		interrupt flag
     ///  @return  1 if interrupt occur, 0 if no interrupt
@@ -86,3 +86,4 @@ extern "C"
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
+#endif
