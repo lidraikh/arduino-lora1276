@@ -12,10 +12,10 @@ mos.yml, add:
 config_schema:
  - ["", ]
 libs:
- - origin: https://github.com/lidraikh/Lora1276/
+ - origin: https://github.com/lidraikh/arduino-lora1276
   ```
   
   main.c, add:
 ```
-#include "mgos_lora1276.h"
+#include "mgos_arduino_lora1276.h"
 ```
