@@ -1,4 +1,4 @@
-#include "mgos_arduino_lora1276.h"
+#include "mgos_lora1276.h"
 
 LORA *mgos_LORA_create(int nt NSSPin, int NRESETPin, int txEnPin, int rxEnPin)
 {
