@@ -14,10 +14,10 @@
 
 #include "Arduino.h"
 
-typedef 	boolean			bool;
+//typedef 	boolean			bool;
 typedef 	unsigned char	uint8_t;
-typedef 	unsigned int	uint16_t;
-typedef 	unsigned long	uint32_t;
+//typedef 	unsigned int	uint16_t;
+//typedef 	unsigned long	uint32_t;
 
 // XOSC frequency,in lora1276/1278, F(XOSC)=32M
 #define LORA_XOSC						32000000

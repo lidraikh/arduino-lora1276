@@ -5,13 +5,19 @@ version: 1.0
 
 sources:
   - src
+includes:
+  - include
+
 filesystem:
   - fs
+
 config_schema:
+
 libs:
+  - origin: https://github.com/mongoose-os-libs/arduino-compat
+  - origin: https://github.com/mongoose-os-libs/arduino-spi
 
 tags:
   - c
-  - docs:misc:Empty
 
 manifest_version: 2017-09-29
