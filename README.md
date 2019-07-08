@@ -17,5 +17,5 @@ libs:
   
   main.c, add:
 ```
-#include "mgos_arduino_lora1276.h"
+#include "mgos_lora1276.h"
 ```
