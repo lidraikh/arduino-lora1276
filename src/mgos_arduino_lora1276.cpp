@@ -32,7 +32,7 @@ bool mgos_LORA_rxInit(LORA *lora)
 ///  @param sendbuf		buf of data to send
 ///  @param	sendLen		length of data to send,less than 64 bytes
 ///	 @return  1 if tx ok, 0 otherwise
-bool mgos_LORA_txPacket(LORA *lora, int *sendbuf, int sendLen)
+bool mgos_LORA_txPacket(LORA *lora, uint8_t* sendbuf, int sendLen)
 {
     if (lora == nullptr)
         return false;
@@ -41,7 +41,7 @@ bool mgos_LORA_txPacket(LORA *lora, int *sendbuf, int sendLen)
 ///  Receive packet from RF
 ///  @param recvbuf		buf to save the rx data
 ///	 @return length of rx data
-int mgos_LORA_rxPacket(LORA *lora, int *recvbuf)
+int mgos_LORA_rxPacket(LORA *lora, uint8_t* recvbuf)
 {
     if (lora == nullptr)
         return 0;
@@ -81,7 +81,7 @@ void mgos_LORA_clrInterrupt(LORA *lora)
 ///	 @param	freq	    value of frequency
 ///  @return  1 if ok, 0 otherwise
 ///  @note: the range is 137~1020Mhz for lora1276 ,137~525Mhz for lora1278
-bool mgos_LORA_setFrequency(LORA *lora, int freq)
+bool mgos_LORA_setFrequency(LORA *lora, uint32_t freq)
 {
     if (lora == nullptr)
         return false;

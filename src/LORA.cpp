@@ -1,4 +1,4 @@
-#include "LORA.h"
+#include <LORA.h>
 #include <SPI.h>
 
 // default header mode is explicit header mode
@@ -23,7 +23,7 @@ void LORA::spiInit()
 	// depends on LORA spi timing
 	SPI.setBitOrder(MSBFIRST);
 	// too fast may cause error
-	//SPI.setClockDivider(SPI_CLOCK_DIV16); //commented to use defoult settings
+	//SPI.setClockDivider(SPI_CLOCK_DIV16);
 	SPI.setDataMode(SPI_MODE0);
 }
 void LORA::pinInit()
@@ -187,8 +187,8 @@ bool LORA::setPreambleLen(uint16_t length)
 		return false;
 	SPIWriteReg(LR_RegPreambleMsb,length>>8);
 	 // the actual preamble len is length+4.25
-	SPIWriteReg(LR_RegPreambleLsb,length&0xff); 
-	return true;    
+	SPIWriteReg(LR_RegPreambleLsb,length&0xff);  
+	return true;   
 }
 bool LORA::setHeaderMode(uint8_t mode)
 {
@@ -224,13 +224,14 @@ bool LORA::setRxTimeOut(uint16_t symbTimeOut)
 	//rxtimeout=symbTimeOut*(2^SF*BW)
 	if((symbTimeOut==0)||(symbTimeOut>0x3ff))
 		return false;
+
 	uint8_t temp;
 	temp=SPIReadReg(LR_RegModemConfig2);
 	temp=temp&0xfc;
 	SPIWriteReg(LR_RegModemConfig2,temp|(symbTimeOut>>8&0x03));
 	SPIWriteReg(LR_RegSymbTimeoutLsb,symbTimeOut&0xff); 
 	return true;
-	}
+}
 // RSSI[dBm]=-137+rssi value
 uint8_t LORA::readRSSI(uint8_t mode)
 {

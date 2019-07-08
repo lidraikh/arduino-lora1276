@@ -26,11 +26,11 @@ extern "C"
     ///  @param sendbuf		buf of data to send
     ///  @param	sendLen		length of data to send,less than 64 bytes
     ///	 @return  1 if tx ok, 0 otherwise
-    bool mgos_LORA_txPacket(LORA *lora, int *sendbuf, int sendLen);
+    bool mgos_LORA_txPacket(LORA *lora, uint8_t* sendbuf, int sendLen);
     ///  Receive packet from RF
     ///  @param recvbuf		buf to save the rx data
     ///	 @return length of rx data
-    int mgos_LORA_rxPacket(LORA *lora, int *recvbuf);
+    int mgos_LORA_rxPacket(LORA *lora, uint8_t* recvbuf);
     ///  Inquire interrupt.
     ///  @param irqMask		interrupt flag
     ///  @return  1 if interrupt occur, 0 if no interrupt
@@ -45,7 +45,7 @@ extern "C"
     ///	 @param	freq	    value of frequency
     ///  @return  1 if ok, 0 otherwise
     ///  @note: the range is 137~1020Mhz for lora1276 ,137~525Mhz for lora1278
-    bool mgos_LORA_setFrequency(LORA *lora, int freq);
+    bool mgos_LORA_setFrequency(LORA *lora, uint32_t freq);
     ///  Set RF parameter.
     ///	 @param	BW	        bandwidth , range from 7.8k to 500k
     ///	 @param	CR	        coding rate , range from 4/5 to 4/8
