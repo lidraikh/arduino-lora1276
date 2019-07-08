@@ -1,6 +1,5 @@
-#include <LORA.h>
+#include "LORA.h"
 #include <SPI.h>
-#include <SoftwareSerial.h>
 
 // default header mode is explicit header mode
 uint8_t _headerMode;
@@ -24,7 +23,7 @@ void LORA::spiInit()
 	// depends on LORA spi timing
 	SPI.setBitOrder(MSBFIRST);
 	// too fast may cause error
-	SPI.setClockDivider(SPI_CLOCK_DIV16);
+	//SPI.setClockDivider(SPI_CLOCK_DIV16); //commented to use defoult settings
 	SPI.setDataMode(SPI_MODE0);
 }
 void LORA::pinInit()
@@ -62,7 +61,7 @@ void LORA::powerOnReset()
 bool LORA::config()
 {
 	// In setting mode, RF module should turn to sleep mode
-	// low frequency mode£¬sleep mode
+	// low frequency modeï¿½ï¿½sleep mode
 	SPIWriteReg(LR_RegOpMode,LR_Mode_SLEEP|LORA_FREQUENCY_BAND);	
 	// wait for steady
 	delay(5);								
@@ -106,6 +105,8 @@ bool LORA::config()
 	// default payload length is 10 bytes in implicit mode
 	setPayloadLength(10);
 
+	return true;
+
 }
 bool LORA::setFrequency(uint32_t freq)
 {
@@ -139,6 +140,7 @@ bool LORA::setFrequency(uint32_t freq)
 	// read if the value has been in register
 	if((reg[0]!=SPIReadReg(LR_RegFrMsb))||(reg[1]!=SPIReadReg(LR_RegFrMid))||(reg[2]!=SPIReadReg(LR_RegFrLsb)))
 		return false;
+	return true;
 }
 bool LORA::setRFpara(uint8_t BW,uint8_t CR,uint8_t SF,uint8_t payloadCRC)
 {
@@ -185,7 +187,8 @@ bool LORA::setPreambleLen(uint16_t length)
 		return false;
 	SPIWriteReg(LR_RegPreambleMsb,length>>8);
 	 // the actual preamble len is length+4.25
-	SPIWriteReg(LR_RegPreambleLsb,length&0xff);     
+	SPIWriteReg(LR_RegPreambleLsb,length&0xff); 
+	return true;    
 }
 bool LORA::setHeaderMode(uint8_t mode)
 {
@@ -198,6 +201,7 @@ bool LORA::setHeaderMode(uint8_t mode)
 	temp=SPIReadReg(LR_RegModemConfig1);
 	temp=temp&0xfe;
 	SPIWriteReg(LR_RegModemConfig1,temp|mode);
+	return true;
 }
 // in implict header mode, the payload length is fix len
 // need to set payload length first in this mode
@@ -205,12 +209,14 @@ bool LORA::setPayloadLength(uint8_t len)
 {
 	_payloadLength=len;
 	SPIWriteReg(LR_RegPayloadLength,len);
+	return true;
 }
 bool LORA::setTxPower(uint8_t power)
 {
 	if(power>0x0f)
 		return false;
 	SPIWriteReg(LR_RegPaConfig,LR_PASELECT_PA_POOST|0x70|power);
+	return true;
 }
 // only valid in rx single mode
 bool LORA::setRxTimeOut(uint16_t symbTimeOut)
@@ -218,13 +224,13 @@ bool LORA::setRxTimeOut(uint16_t symbTimeOut)
 	//rxtimeout=symbTimeOut*(2^SF*BW)
 	if((symbTimeOut==0)||(symbTimeOut>0x3ff))
 		return false;
-
 	uint8_t temp;
 	temp=SPIReadReg(LR_RegModemConfig2);
 	temp=temp&0xfc;
 	SPIWriteReg(LR_RegModemConfig2,temp|(symbTimeOut>>8&0x03));
 	SPIWriteReg(LR_RegSymbTimeoutLsb,symbTimeOut&0xff); 
-}
+	return true;
+	}
 // RSSI[dBm]=-137+rssi value
 uint8_t LORA::readRSSI(uint8_t mode)
 {
@@ -243,6 +249,7 @@ bool LORA::rxInit()
 	clrInterrupt();		// clear irq flag
 	setFifoAddrPtr(LR_RegFifoRxBaseAddr);	// set FIFO addr
 	enterRxMode();		// start rx
+	return true;
 }
 bool LORA::txPacket(uint8_t* sendbuf,uint8_t sendLen)
 {
