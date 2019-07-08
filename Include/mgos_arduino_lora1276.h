@@ -2,8 +2,8 @@
  * Arduino lora1276 library API wrapper
  */
 
-#ifndef _MGOS_LORA1276_H_
-#define _MGOS_LORA1276_H_
+#ifndef _MGOS_ARDUINO_LORA1276_H_
+#define _MGOS_ARDUINO_LORA1276_H_
 
 #include "LORA.h"
 
