@@ -1,6 +1,6 @@
-author: mongoose-os
+author: Leo Idraikh
 type: lib
-description: An empty lib that does nothing
+description: Mongoos library for Lora1276, for Arduino Librar by NiceRF
 version: 1.0
 
 sources:
