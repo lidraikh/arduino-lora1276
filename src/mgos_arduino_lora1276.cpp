@@ -1,11 +1,11 @@
 #include "mgos_arduino_lora1276.h"
 
-CCT_LORA *mgos_LORA_create(int NSSPin, int NRESETPin, int txEnPin, int rxEnPin)
+LORA *mgos_LORA_create(int NSSPin, int NRESETPin, int txEnPin, int rxEnPin)
 {
     return new LORA(NSSPin, NRESETPin, txEnPin, rxEnPin);
 }
 
-void mgos_LORA_close(CCT_LORA *lora)
+void mgos_LORA_close(LORA *lora)
 {
     if (lora != nullptr)
     {
@@ -14,7 +14,7 @@ void mgos_LORA_close(CCT_LORA *lora)
     }
 }
 
-bool mgos_LORA_init(CCT_LORA *lora)
+bool mgos_LORA_init(LORA *lora)
 {
     if (lora == nullptr)
         return false;
@@ -22,7 +22,7 @@ bool mgos_LORA_init(CCT_LORA *lora)
 }
 ///  Initialise rx mode.
 ///  @return  1 if ok, 0 otherwise
-bool mgos_LORA_rxInit(CCT_LORA *lora)
+bool mgos_LORA_rxInit(LORA *lora)
 {
     if (lora == nullptr)
         return false;
@@ -32,7 +32,7 @@ bool mgos_LORA_rxInit(CCT_LORA *lora)
 ///  @param sendbuf		buf of data to send
 ///  @param	sendLen		length of data to send,less than 64 bytes
 ///	 @return  1 if tx ok, 0 otherwise
-bool mgos_LORA_txPacket(CCT_LORA *lora, uint8_t* sendbuf, int sendLen)
+bool mgos_LORA_txPacket(LORA *lora, uint8_t* sendbuf, int sendLen)
 {
     if (lora == nullptr)
         return false;
@@ -41,7 +41,7 @@ bool mgos_LORA_txPacket(CCT_LORA *lora, uint8_t* sendbuf, int sendLen)
 ///  Receive packet from RF
 ///  @param recvbuf		buf to save the rx data
 ///	 @return length of rx data
-int mgos_LORA_rxPacket(CCT_LORA *lora, uint8_t* recvbuf)
+int mgos_LORA_rxPacket(LORA *lora, uint8_t* recvbuf)
 {
     if (lora == nullptr)
         return 0;
@@ -50,7 +50,7 @@ int mgos_LORA_rxPacket(CCT_LORA *lora, uint8_t* recvbuf)
 ///  Inquire interrupt.
 ///  @param irqMask		interrupt flag
 ///  @return  1 if interrupt occur, 0 if no interrupt
-bool mgos_LORA_waitIrq(CCT_LORA *lora, int irqMask)
+bool mgos_LORA_waitIrq(LORA *lora, int irqMask)
 {
     if (lora == nullptr)
         return false;
@@ -64,14 +64,14 @@ void mgos_LORA_enterStbyMode(CCT_LORA *lora)
     return lora->enterStbyMode();
 }
 ///  Enter sleep mode.
-void mgos_LORA_enterSleepMode(CCT_LORA *lora)
+void mgos_LORA_enterSleepMode(LORA *lora)
 {
     if (lora == nullptr)
         return ;
     lora->enterSleepMode();
 }
 ///  Clear interrupt
-void mgos_LORA_clrInterrupt(CCT_LORA *lora)
+void mgos_LORA_clrInterrupt(LORA *lora)
 {
     if (lora == nullptr)
         return ;
@@ -81,7 +81,7 @@ void mgos_LORA_clrInterrupt(CCT_LORA *lora)
 ///	 @param	freq	    value of frequency
 ///  @return  1 if ok, 0 otherwise
 ///  @note: the range is 137~1020Mhz for lora1276 ,137~525Mhz for lora1278
-bool mgos_LORA_setFrequency(CCT_LORA *lora, uint32_t freq)
+bool mgos_LORA_setFrequency(LORA *lora, uint32_t freq)
 {
     if (lora == nullptr)
         return false;
@@ -97,7 +97,7 @@ bool mgos_LORA_setFrequency(CCT_LORA *lora, uint32_t freq)
 ///  @note: the RF data rate depends on bandwidth and spreading factor
 ///  coding rate affects time on air
 ///	 if SF=6 ,it will turn to implict mode in this function
-bool mgos_LORA_setRFpara(CCT_LORA *lora, int BW, int CR, int SF, int CRC)
+bool mgos_LORA_setRFpara(LORA *lora, int BW, int CR, int SF, int CRC)
 {
     if (lora == nullptr)
         return false;
@@ -106,7 +106,7 @@ bool mgos_LORA_setRFpara(CCT_LORA *lora, int BW, int CR, int SF, int CRC)
 ///  Set preamble length.
 ///	 @param	len			preamble length
 ///  @return  1 if ok, 0 otherwise
-bool mgos_LORA_setPreambleLen(CCT_LORA *lora, int length)
+bool mgos_LORA_setPreambleLen(LORA *lora, int length)
 {
     if (lora == nullptr)
         return false;
@@ -125,7 +125,7 @@ bool mgos_LORA_setHeaderMode(CCT_LORA *lora, int mode)
 ///	 @param	len		payload length
 ///  @note	in  implicit header mode ,payload length must be set first
 ///   		length is fix in  implicit header mode
-bool mgos_LORA_setPayloadLength(CCT_LORA *lora, int len)
+bool mgos_LORA_setPayloadLength(LORA *lora, int len)
 {
     if (lora == nullptr)
         return false;
@@ -134,7 +134,7 @@ bool mgos_LORA_setPayloadLength(CCT_LORA *lora, int len)
 ///  Set tx power.
 ///	 @param	power		    power level,0 to 15
 ///  @return  1 if ok, 0 otherwise
-bool mgos_LORA_setTxPower(CCT_LORA *lora, int power)
+bool mgos_LORA_setTxPower(LORA *lora, int power)
 {
     if (lora == nullptr)
         return false;
@@ -143,7 +143,7 @@ bool mgos_LORA_setTxPower(CCT_LORA *lora, int power)
 ///  Set rx time out.
 ///	 @param	 symbTimeOut	actual timeout = symTimeout * (2^SF/BW)
 ///  @return  1 if ok, 0 otherwise
-bool mgos_LORA_setRxTimeOut(CCT_LORA *lora, int symbTimeOut)
+bool mgos_LORA_setRxTimeOut(LORA *lora, int symbTimeOut)
 {
     if (lora == nullptr)
         return false;
@@ -152,7 +152,7 @@ bool mgos_LORA_setRxTimeOut(CCT_LORA *lora, int symbTimeOut)
 ///  Read rssi
 ///	 @param	 mode	   0 read  current rssi, 1 read rssi of last packet received
 ///  @return   value of rssi
-int readRSSI(CCT_LORA *lora, int mode)
+int readRSSI(LORA *lora, int mode)
 {
     if (lora == nullptr)
         return false;
