@@ -4,6 +4,7 @@
 
 #ifndef _MGOS_ARDUINO_LORA1276_H_
 #define _MGOS_ARDUINO_LORA1276_H_
+#endif
 
 #include "LORA.h"
 
