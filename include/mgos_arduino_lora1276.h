@@ -5,13 +5,15 @@
 #ifndef _MGOS_ARDUINO_LORA1276_H_
 #define _MGOS_ARDUINO_LORA1276_H_
 
-#include "LORA.h"
+
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
+    #include "LORA.h"
+    
     // Code goes here
     LORA *mgos_LORA_create(int NSSPin, int NRESETPin, int txEnPin, int rxEnPin);
 
