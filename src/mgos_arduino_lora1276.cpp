@@ -57,7 +57,7 @@ bool mgos_LORA_waitIrq(LORA *lora, int irqMask)
     return lora->waitIrq(irqMask);
 }
 ///  Enter standby mode.
-void mgos_LORA_enterStbyMode(CCT_LORA *lora)
+void mgos_LORA_enterStbyMode(LORA *lora)
 {
     if (lora == nullptr)
         return ;
@@ -115,7 +115,7 @@ bool mgos_LORA_setPreambleLen(LORA *lora, int length)
 ///  Set header mode
 ///	 @param	mode		LR_IMPLICIT_HEADER_MODE or LR_EXPLICIT_HEADER_MODE
 ///  @note	if SF=6 ,it must be implicit header mode
-bool mgos_LORA_setHeaderMode(CCT_LORA *lora, int mode)
+bool mgos_LORA_setHeaderMode(LORA *lora, int mode)
 {
     if (lora == nullptr)
         return false;
