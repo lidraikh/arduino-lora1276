@@ -203,7 +203,7 @@ public:
 	///  @param NRESETPin 	output pin,enter shutdown mode when driving low
 	///  @param txEnPin 	output pin,tx Antenna Switch,should be high while in tx mode
 	///  @param rxEnPin 	output pin,rx Antenna Switch,should be high while in rx mode
-	LORA(uint8_t NSSPin = 10, uint8_t NRESETPin = 9,uint8_t txEnPin = 8,uint8_t rxEnPin = 7);
+	LORA(uint8_t NSSPin, uint8_t NRESETPin,uint8_t txEnPin,uint8_t rxEnPin);
 	///  Initialise lora module
 	///  @return  1 if ok, 0 otherwise
 	bool init();
